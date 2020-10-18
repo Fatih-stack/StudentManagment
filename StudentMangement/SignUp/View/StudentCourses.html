@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <meta charset="utf-8" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.5.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="../Scripts/angular.js"></script>
+    <script src="../Scripts/angular-route.js"></script>
+    <title></title>
+</head>
+<body>
+
+    <table class="table table-hover" border>
+        <tr>
+            <ng-container>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Course</th>
+                <th>Teacher</th>
+                <th>Student Sil</th>
+            </ng-container>
+        </tr>
+        <ng-container *ngFor="let course of courseService.list">
+            <tr *ngFor="let stdnt of service.list">
+                <ng-container *ngIf="stdnt.Course === course.CName && stdnt.Teacher === course.Teacher">
+                    <td (click)="populateForm(stdnt)">{{stdnt.firstName}}</td>
+                    <td (click)="populateForm(stdnt)">{{stdnt.lastName}}</td>
+                    <td (click)="populateForm(stdnt)">{{stdnt.username}}</td>
+                    <td (click)="populateForm(stdnt)">{{stdnt.Email}}</td>
+                    <td (click)="populateForm(stdnt)">{{stdnt.Course}}</td>
+                    <td (click)="populateForm(stdnt)">{{stdnt.Teacher}}</td>
+                    <td><button (click)="onDelete(stdnt.id)" class="btn btn-sm btn-outline-danger">X</button></td>
+                </ng-container>
+            </tr>
+        </ng-container>
+    </table>
+</body>
+</html>

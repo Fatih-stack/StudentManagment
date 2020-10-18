@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <meta charset="utf-8" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.5.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="../Scripts/angular.js"></script>
+    <script src="../Scripts/angular-route.js"></script>
+    <script src="service.js"></script>
+    <script src="demo.js"></script>
+    <title></title>
+</head>
+<body>
+    <table class="table table-hover border">
+        <tr>
+            <th>Teacher</th>
+            <th>Link/Announcement</th>
+            <th>Post Sil</th>
+        </tr>
+        <tr *ngFor="let post of service.list">
+            <td (click)="populateForm(post)">{{post.Teacher}}</td>
+            <td (click)="populateForm(post)">{{post.Share}}</td>
+            <td><button (click)="onDelete(post.id)" class="btn btn-sm btn-outline-danger">X</button></td>
+        </tr>
+    </table>
+</body>
+</html>

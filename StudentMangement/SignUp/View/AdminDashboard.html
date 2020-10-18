@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="../Scripts/jquery-3.5.1.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <script src="AngularJS/angular.js"></script>
+    <script src="AngularJS/angular-local-storage.min.js"></script>
+    <script src="AngularJS/authInterceptorService.js"></script>
+    <script src="AngularJS/Teacher.js"></script>
+
+    <link href="style.css" rel="stylesheet" />
+    <link href="AdminDashboard.css" rel="stylesheet" />
+</head>
+<body class="main" ng-app="myApp" ng-controller="logoutController">
+    <div class="container-fluid">
+        <!-- nav -->
+        <div class="form-group">
+            <div style="padding-top:10px;">
+                <input ng-click="LogOut()" type="button" class="btn btn-success" value="Logout" />
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <!-- order items table-->
+            <div class="form-group">
+                <h3 ng-bind="userName"></h3>
+
+                <br />
+
+                <div class="tab">
+                    <button class="tablinks" onclick="openTab(event, 'AddTeacher')">Add Teacher</button>
+                    <button class="tablinks" onclick="openTab(event, 'AddStudent')">Add Student</button>
+                    <button class="tablinks" onclick="openTab(event, 'ViewTeacher')">View Teacher</button>
+                    <button class="tablinks" onclick="openTab(event, 'ViewStudent')">View Student</button>
+                    <button class="tablinks" onclick="openTab(event, 'ViewCourse')">View Course</button>
+                </div>
+                
+                <div id="AddTeacher" class="tabcontent">
+                    <h3>Add Teacher</h3>
+                    <Form ng-submit="InsertTeacher(Teacher)" name="myForm" novalidate>
+                        <div class="form-group">
+                            <label>First Name : </label>
+                            <input type="text" name="firstname" required ng-model="Teacher.firstName"
+                                   placeholder="Enter name" />
+                            <br>
+                            <span style="color:red" ng-show="myForm.firstname.$error.required
+                        && myForm.firstname.$dirty">firstname is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name : </label>
+                            <input type="text" name="lastname" required ng-model="Teacher.lastName"
+                                   placeholder="Enter Surname" />
+                            <br />
+                            <span style="color:red" ng-show="myForm.lastname.$error.required
+                        && myForm.lastname.$dirty">lastname is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Username : </label>
+                            <input type="text" name="username" required ng-model="Teacher.username"
+                                   placeholder="Enter User Name" />
+                            <br />
+                            <span style="color:red" ng-show="myForm.username.$error.required
+                        && myForm.username.$dirty">username is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Email : </label>
+                            <input type="text" name="Email" required ng-model="Teacher.Email"
+                                   placeholder="Enter Email" />
+                            <br />
+                            <span style="color:red" ng-show="myForm.Email.$error.required
+                        && myForm.Email.$dirty">Email is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Password : </label>
+                            <input type="password" name="Password" required ng-model="Teacher.Password"
+                                   placeholder="Enter Password" />
+                            <br />
+                            <span style="color:red" ng-show="myForm.Password.$error.required
+                        && myForm.Password.$dirty">Password is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Course : </label>
+                            <input type="text" name="course" ng-model="Teacher.Course"
+                                   placeholder="Course" />
+                        </div>
+                        <br /><br />
+                        <button ng-disabled="!myForm.$valid" type="submit"> REGISTER </button>
+                    </Form>
+                </div>
+
+                <div id="AddStudent" class="tabcontent">
+                    <h3>Add Student</h3>
+                    <Form ng-submit="InsertStd(Student)" name="myForm" novalidate>
+                        <div class="form-group">
+                            <label>First Name : </label>
+                            <input type="text" name="firstname" required ng-model="Student.firstName"
+                                   placeholder="Enter name" />
+                            <br>
+                            <span style="color:red" ng-show="myForm.firstname.$error.required
+                        && myForm.firstname.$dirty">firstname is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name : </label>
+                            <input type="text" name="lastname" required ng-model="Student.lastName"
+                                   placeholder="Enter Surname" />
+                            <br />
+                            <span style="color:red" ng-show="myForm.lastname.$error.required
+                        && myForm.lastname.$dirty">lastname is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" name="username" required ng-model="Student.username"
+                                   placeholder="Enter User Name" />
+                            <br />
+                            <span style="color:red" ng-show="myForm.username.$error.required
+                        && myForm.username.$dirty">username is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" name="Email" required ng-model="Student.Email"
+                                   placeholder="Enter Email" />
+                            <br />
+                            <span style="color:red" ng-show="myForm.Email.$error.required
+                        && myForm.Email.$dirty">Email is required</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="Password" required ng-model="Student.Password"
+                                   placeholder="Enter Password" />
+                            <br />
+                            <span style="color:red" ng-show="myForm.Password.$error.required
+                        && myForm.Password.$dirty">Password is required</span>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label>Course</label>
+                            <input type="text" name="course" ng-model="Student.Course"
+                                   placeholder="Course" />
+                        </div>
+                        <div class="form-group">
+                            <label>Teacher</label>
+                            <input type="text" name="Teacher" ng-model="Student.Teacher"
+                                   placeholder="Course" />
+                        </div>
+                        <br />
+                        <br />
+                        <button ng-disabled="!myForm.$valid" type="submit"> REGISTER </button>
+                    </Form>
+                </div>
+
+                <div id="ViewTeacher" class="tabcontent" ng-controller="TeacherCtrl">
+                    <h3>Teachers</h3>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Teacher Name</th>
+                                <th>Teacher Surname</th>
+                                <th>Teacher UserName</th>
+                                <th>Teacher Sil</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="item in Teacher">
+                            <td>{{item.firstName}}</td>
+                            <td>{{item.lastName}}</td>
+                            <td>{{item.username}}</td>
+                            <td><input type="button" ng-click="onDelete(item)" value="Delete"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="ViewStudent" class="tabcontent" ng-controller="StudentCtrl">
+                    <h3>Students</h3>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Student Surname</th>
+                                <th>Student UserName</th>
+                                <th>Student Sil</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="item in Student">
+                            <td>{{item.firstName}}</td>
+                            <td>{{item.lastName}}</td>
+                            <td>{{item.username}}</td>
+                            <td><input type="button" ng-click="onDelete(item)" value="Delete"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="ViewCourse" class="tabcontent" ng-controller="CourseCtrl">
+                    <h3>Courses</h3>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Course Name</th>
+                                <th>Duration</th>
+                                <th>Contents</th>
+                                <th>Teacher</th>
+                                <th>Course Sil</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="item in Course">
+                            <td>{{item.CName}}</td>
+                            <td>{{item.Duration}}</td>
+                            <td>{{item.Contents}}</td>
+                            <td>{{item.Teacher}}</td>
+                            <td><input type="button" ng-click="onDelete(item)" value="Delete"></td>
+                        </tr>
+                    </table>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</body>
+</html>
